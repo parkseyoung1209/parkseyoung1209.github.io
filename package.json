@@ -2,6 +2,7 @@
   "name": "parkseyoung1209.github.io",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://parkseyoung1209.github.io",
   "dependencies": {
     "@craco/craco": "^7.1.0",
     "@emotion/react": "^11.13.3",
@@ -14,6 +15,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.7",
     "craco-alias": "^3.0.1",
+    "gh-pages": "^6.2.0",
     "rc-slider": "^11.1.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -29,6 +31,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
