@@ -1,6 +1,6 @@
 package com.mypage.controller;
 
-import com.mypage.model.vo.Category;
+import com.mypage.model.dto.CategoryDTO;
 import com.mypage.service.ContentsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,9 +15,26 @@ public class CategoryController {
     @Autowired
     private ContentsService cService;
 
-    @PostMapping("private/addCategory")
-    public ResponseEntity addCategory(@RequestBody Category vo, int parentId) {
-        cService.createCategory(vo, parentId);
+    @PostMapping("private/category")
+    public ResponseEntity addCategory(@RequestBody CategoryDTO vo) {
+        cService.createOrUpdateCategory(vo);
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @PutMapping("private/category")
+    public ResponseEntity updateCategory(@RequestBody CategoryDTO vo) {
+        cService.createOrUpdateCategory(vo);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @DeleteMapping("private/category")
+    public ResponseEntity deleteCategory(@RequestParam(name = "categoryId") int categoryId) {
+        cService.deleteCategory(categoryId);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @GetMapping("category/parent")
+    public ResponseEntity findParentCategory(@RequestParam(name = "parentId") int parentId) {
+        return ResponseEntity.status(HttpStatus.OK).body(cService.findByparentIdList(parentId));
     }
 }
