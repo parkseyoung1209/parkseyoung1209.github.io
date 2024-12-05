@@ -5,7 +5,7 @@ const auth = axios.create({
 });
 
 const allPermit = axios.create({
-    baseURL : "http://localhost:8080/myblog/"
+    baseURL : "http://localhost:8080/myblog/public/"
 });
 
 export const postCategory = async (category) => {
@@ -25,9 +25,13 @@ export const deleteCategory = async (categoryId) => {
 };
 
 export const getbychild = async (parentId) => {
-    return await allPermit.get("category/parent", {
+    return await allPermit.get("category", {
         params : {
             parentId
         }
     });
+};
+
+export const getOneCategory = async (categoryId) => {
+    return await allPermit.get(`category/${categoryId}`);
 };

@@ -33,6 +33,10 @@ public class ContentsService {
        return cDao.findAll();
     }
 
+    public Category findByIdCategory(int categoryId) {
+        return cDao.findById(categoryId).orElse(null);
+    }
+
     @Transactional
     public void createOrUpdateCategory(CategoryDTO categoryDTO) {
         Category root = Category.builder()
@@ -48,12 +52,12 @@ public class ContentsService {
 
         Category parentCategory = categoryDTO.getParentId() == 0
                 ? root
-                : cDao.findById(categoryDTO.getParentId()).orElse(null);
+                : findByIdCategory(categoryDTO.getParentId());
 
         Category category;
 
         if(categoryDTO.getCategoryId() != 0) { // update 관련
-            category = cDao.findById(categoryDTO.getCategoryId()).orElse(null);
+            category = findByIdCategory(categoryDTO.getCategoryId());
             category.setCategoryTitle(categoryDTO.getCategoryTitle());
 
             if(!category.getParent().equals(parentCategory)) {
