@@ -1,9 +1,6 @@
 package com.mypage.model.vo;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,9 +25,10 @@ public class User {
     @Column(name = "user_password")
     private String userPassword;
 
-    @Column(name = " user_nickname")
+    @Column(name = "user_nickname")
     private String userNickname;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "user_role")
     private UserRole userRole;
 
